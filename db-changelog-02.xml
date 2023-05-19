@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <include file="db-changelog-01.xml" />
+
+    <changeSet id="List of BREEDS" author="DBA presents">
+        <insert tableName="BREEDS">
+            <column name="BRE_NAME" value="Golden Retriever" />
+        </insert>
+        <insert tableName="BREEDS">
+            <column name="BRE_NAME" value="American Staffordshire Terrier" />
+        </insert>
+        <insert tableName="BREEDS">
+            <column name="BRE_NAME" value="German Shepherd Doger" />
+        </insert>
+
+        <rollback>
+            <delete tableName="BREEDS">
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="delete-example" id="delete-example">
+        <delete tableName="BREEDS">
+            <where>bre_name='Golden Retriever'</where>
+        </delete>
+        <rollback>
+            <delete tableName="BREEDS">
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet author="update-example" id="update-example">
+        <update tableName="BREEDS">
+            <column name="bre_name" value="new value"/>
+            <where>bre_name='German Shepherd Doger'</where>
+        </update>
+        <rollback>
+            <delete tableName="BREEDS">
+            </delete>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
